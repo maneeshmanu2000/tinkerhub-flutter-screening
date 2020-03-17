@@ -1,6 +1,6 @@
 import 'dart:io';
 //class for learner or mentor
-class LearnerOrMentor{
+class MentorOrStudent{
     String interest,mentorOrLearner,name,availableTime;
     int id,type,limit=0,time;
     var stackList = new List(100),nameList=new List(100),atlist=new List(100),mOrL = new List(100);
@@ -9,7 +9,7 @@ class LearnerOrMentor{
     atlist for available time
     mOrL is for checking mentor or Learner
   */
-    void address(){//this function collect the details of all mentors and learners
+    void add(){//this function collect the details of all mentors and learners
       print("Enter the name of person:");
       name = stdin.readLineSync();
       limit++;
@@ -19,12 +19,12 @@ class LearnerOrMentor{
       this.setAvailableTime();
     }
     void addStacks(){ //function specified in problem statement
-      print("Enter the stack of interest / expertise:");
+      print("Enter the Area of Interest / Expertise:");
       interest = stdin.readLineSync();
       this.stackList[limit]=interest;
     }
     void setMentorOrLearner(){//function specified in problem statement
-      print("\n\n Are you a Mentor or Learner");
+      print("\n\n Type of Enrollment");
       print(" Enter 1 for Mentor \n Enter 2 for Learner\n");
       print("Enter the input:");
       type = int.parse(stdin.readLineSync());
@@ -42,22 +42,26 @@ class LearnerOrMentor{
     }
 }
 void main() {
-  LearnerOrMentor person = new LearnerOrMentor();
+  MentorOrStudent person = new MentorOrStudent();
   String n,stack;
   int i,time;
-   void getMentor(var x,var y,var z,int m){         //Required
+   void getMentor(var x,var y,var z,int m){         //function specified in problem statement
+                                                    // x - stack list
+                                                    // y - enrollment list
+                                                    // z - time available (for mentors)
    if (m==0)
-   { // x stack list
+   {
+      // x stack list
      // y mentor or learner list
      // z available time list
-     print("No one is registerd");
+     print("No one has enrolled. Imporve Promotion ;D");
    }
    else{
     for (i=1;i<=m;i++){
       if (y[i]==1){
         stack=x[i];
         time=z[i];
-        print("\t A mentor in $stack is available for $time hours \n");
+        print("\t A mentor for $stack is available for $time hours \n");
       }
     }
    }
@@ -65,18 +69,20 @@ void main() {
   while(true)
   {
     print("MAIN MENU");
-    print(" Enter 1 for Add person \n Enter 2 for checking available mentors\n");
-    print("Enter the input :");
+    print("CHOICES \n 1. Add New Person \n 2. Search Existing Mentors \n 3. Exit \n Enter Choice:");
     n = stdin.readLineSync();
     if (n=='1')
     {
-      person.address();
+      person.add();
     }
     else if (n=='2'){
       getMentor(person.stackList,person.mOrL,person.atlist,person.limit);
     }
+    else if (n=='3'){
+      break;
+    }
     else{
-      print("Invalid Option");
+      print("Invalid Choice");
     }
   }
 }
